@@ -503,11 +503,20 @@ function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').re
 //  PERSISTENCE
 // ============================================================
 async function localLoad() {
-  try { const r = await window.storage.get('wc26_owned'); return r && r.value ? JSON.parse(r.value) : {}; }
-  catch (e) { return {}; }
+  try {
+    if (window.storage && window.storage.get) {
+      const r = await window.storage.get('wc26_owned');
+      return r && r.value ? JSON.parse(r.value) : {};
+    }
+    const v = localStorage.getItem('wc26_owned');
+    return v ? JSON.parse(v) : {};
+  } catch (e) { return {}; }
 }
 async function localSave() {
-  try { await window.storage.set('wc26_owned', JSON.stringify(owned)); } catch (e) {}
+  try {
+    if (window.storage && window.storage.set) { await window.storage.set('wc26_owned', JSON.stringify(owned)); return; }
+    localStorage.setItem('wc26_owned', JSON.stringify(owned));
+  } catch (e) {}
 }
 
 async function load() {
