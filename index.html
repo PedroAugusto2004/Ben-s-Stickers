@@ -451,12 +451,15 @@ const TEAM_META = {
 };
 const TEAMS = Object.keys(TEAM_META);
 
+// Official Panini 2026 album: 980 base (48 teams x 20 = 960 + 20 special)
+// plus the 12-sticker Coca-Cola promo set = 992 total.
 const SECTIONS = [
-  { id: 'open', name: 'Opening & Tournament', short: 'Opening', count: 30, prefix: 'INT', emoji: '🏆' },
-  { id: 'stad', name: 'Stadiums', short: 'Stadiums', count: 16, prefix: 'STA', emoji: '🏟️' },
+  { id: 'open', name: 'Opening & Tournament', short: 'Opening', count: 12, prefix: 'INT', emoji: '🏆' },
+  { id: 'stad', name: 'Host Cities & Stadiums', short: 'Stadiums', count: 8, prefix: 'STA', emoji: '🏟️' },
+  { id: 'coke', name: 'Coca-Cola Special Edition', short: 'Coca-Cola', count: 12, prefix: 'COK', emoji: '🥤' },
 ];
 TEAMS.forEach(function(t){
-  SECTIONS.push({ id: 'team_'+t, name: TEAM_META[t][0], short: TEAM_META[t][0], count: 18, prefix: t, emoji: TEAM_META[t][1], isTeam: true, code: t });
+  SECTIONS.push({ id: 'team_'+t, name: TEAM_META[t][0], short: TEAM_META[t][0], count: 20, prefix: t, emoji: TEAM_META[t][1], isTeam: true, code: t });
 });
 
 const SEC_BY_ID = {};
